@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <UserSecretsId>9bd7fbd7-f4aa-4089-a98f-e0172f0447d5</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Jaeger" Version="0.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.2105168" />
+    <PackageReference Include="OpenTracing.Contrib.NetCore" Version="0.5.0" />
+  </ItemGroup>
+
+</Project>
