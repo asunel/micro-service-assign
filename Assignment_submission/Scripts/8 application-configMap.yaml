@@ -1,0 +1,13 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: application-config 
+  namespace: default
+data:
+  MSSQL_DB_IP: ""
+  USER_DB: UserDB
+  DB_USER_NAME: sa
+  USER_SERVICE_URL: "http://user-service"
+  ORDER_SERVICE_URL: "http://order-service"
+  JAEGER_HOST: "jaeger-agent"
+    

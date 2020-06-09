@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aggregator-api-deployment
+  namespace: default
+  labels:
+    app: aggregator-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: aggregator-api
+  template:
+    metadata:
+      labels:
+        app: aggregator-api
+    spec:
+      containers:
+      - env:
+        - name: ORDER_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: ORDER_SERVICE_URL
+              name: application-config
+        - name: USER_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              key: USER_SERVICE_URL
+              name: application-config
+        - name: JAEGER_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: JAEGER_HOST
+              name: application-config      
+        name: aggregator-api
+        image: arjunsunel/gke-aggregator-api
+        ports:
+        - containerPort: 80

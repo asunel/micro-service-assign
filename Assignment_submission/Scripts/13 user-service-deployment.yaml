@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-api-deployment
+  labels:
+    app: user-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-api
+  template:
+    metadata:
+      labels:
+        app: user-api
+    spec:
+      containers:
+      - env:
+        - name: PASSWORD
+          value: UGFzc3cwcmQx
+        - name: MSSQL_DB_IP
+          valueFrom:
+            configMapKeyRef:
+              key: MSSQL_DB_IP
+              name: application-config
+        - name: DB_USER_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: DB_USER_NAME
+              name: application-config
+        - name: USER_DB
+          valueFrom:
+            configMapKeyRef:
+              key: USER_DB
+              name: application-config  
+        - name: JAEGER_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: JAEGER_HOST
+              name: application-config
+        name: user-api
+        image: arjunsunel/gke-user-api
+        ports:
+        - containerPort: 80

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-api-deployment
+  labels:
+    app: order-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: order-api
+  template:
+    metadata:
+      labels:
+        app: order-api
+    spec:
+      containers:
+      - env:
+        - name: JAEGER_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: JAEGER_HOST
+              name: application-config
+        name: order-api
+        image: arjunsunel/gke-order-api
+        ports:
+        - containerPort: 80
